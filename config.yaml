@@ -1,0 +1,29 @@
+# Evolutionary-StrAItegy — runtime configuration
+# Comments and blank lines are ignored by the minimal loader.
+# One key:value pair per line.
+
+# Market to study. Backtest data lives in data_csv.
+symbol: BTC-USD
+data_csv: data/market_btcusd_daily.csv
+
+# Walk-forward layout (in trading days)
+train_window: 504        # expanding in-sample window before the first test
+test_horizon: 21         # out-of-sample window length per epoch (no future leakage)
+min_train: 252           # minimum in-sample length before we start testing
+
+# Evolution Strategy (meta-parameter search on the in-sample window)
+# Kept modest so a full walk-forward run finishes in well under a minute.
+es_population: 12
+es_generations: 6
+es_sigma: 0.15
+
+# Default meta-parameters (ES mutates around these)
+risk: 1.0
+vol_target: 0.02
+blend_init: 0.5
+
+# Experts that form the gene pool (one strategy module each)
+experts: momentum,mean_reversion,news_sentiment
+
+# Reproducibility
+seed: 42

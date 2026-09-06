@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Evolutionary-StrAItegy runtime artifacts
+run.log
+artifacts/
+memory/performance.json
+__pycache__/
+*.pyc
