@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from data.opponent_model import opponent_state
+
 
 def detect_regime(close: np.ndarray, t: int, lookback: int = 60) -> str:
     """Return a coarse regime label for the window ending at ``t``.
@@ -38,3 +40,53 @@ def detect_regime(close: np.ndarray, t: int, lookback: int = 60) -> str:
     if trend < -0.10:
         return "bear"
     return "choppy"
+
+
+def detect_context(
+    close: np.ndarray, volume: np.ndarray, t: int
+) -> str:
+    """Map causal opponent features to a predeclared cross-asset context."""
+    state = opponent_state(close, volume, t, lookback=20)
+    if state["aggression"] >= 1.25:
+        return "high_relative_volatility"
+    if state["trend"] >= 0.25:
+        return "uptrend"
+    if state["trend"] <= -0.25:
+        return "downtrend"
+    return "neutral"
+
+
+def precompute_contexts(
+    close: np.ndarray,
+    volume: np.ndarray,
+    *,
+    method: str = "fixed",
+    calibration_window: int = 252,
+) -> np.ndarray:
+    """Compute causal contexts once, independently of strategy parameters."""
+    if method == "fixed":
+        return np.array(
+            [detect_context(close, volume, t) for t in range(len(close))],
+            dtype=object,
+        )
+    if method != "ranked":
+        raise ValueError("context_method must be 'fixed' or 'ranked'")
+
+    states = [opponent_state(close, volume, t, lookback=20) for t in range(len(close))]
+    trends = np.array([state["trend"] for state in states], dtype=float)
+    aggression = np.array([state["aggression"] for state in states], dtype=float)
+    contexts = np.full(len(close), "neutral", dtype=object)
+    minimum_history = min(60, calibration_window)
+    for t in range(len(close)):
+        lo = max(0, t - calibration_window)
+        if t - lo < minimum_history:
+            continue
+        past_trend = trends[lo:t]
+        past_aggression = aggression[lo:t]
+        if aggression[t] >= np.quantile(past_aggression, 0.75):
+            contexts[t] = "high_relative_volatility"
+        elif trends[t] >= np.quantile(past_trend, 2.0 / 3.0):
+            contexts[t] = "uptrend"
+        elif trends[t] <= np.quantile(past_trend, 1.0 / 3.0):
+            contexts[t] = "downtrend"
+    return contexts

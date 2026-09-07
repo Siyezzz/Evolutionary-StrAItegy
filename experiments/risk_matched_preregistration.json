@@ -1,0 +1,32 @@
+{
+  "status": "frozen-before-run",
+  "frozen_at_utc": "2026-09-07T06:53:06.100Z",
+  "motivation": "The one-time TLT result showed that the 0.5-cap candidate carried roughly twice the predecessor volatility and failed the drawdown prediction. Test an exposure cap chosen from development-market volatility only; TLT is prohibited.",
+  "candidate": {
+    "experts": [
+      "momentum",
+      "long_horizon_momentum",
+      "long_only_trend"
+    ],
+    "max_abs_position": 0.2
+  },
+  "predecessor": {
+    "report": "artifacts/gene_pool_ablation_d838b711cadac1f9.json",
+    "pool": "old",
+    "max_abs_position": 1.0
+  },
+  "markets": [
+    "BTC-USD",
+    "SPY",
+    "GLD"
+  ],
+  "costs_bps": [
+    5.0,
+    10.0,
+    25.0
+  ],
+  "primary_prediction_at_10_bps": "Candidate annualized volatility is 0.75x to 1.50x predecessor in at least 2/3 markets and candidate Sharpe is higher in at least 2/3 markets.",
+  "risk_prediction_at_10_bps": "Candidate maximum drawdown is no worse in at least 2/3 markets.",
+  "cost_prediction": "Candidate total return is non-increasing from 5 to 10 to 25 bps in every market.",
+  "promotion_boundary": "This is a development-only diagnostic. TLT may not be loaded, rerun, split, or used for parameter selection. Passing does not restore or create a lockbox claim."
+}

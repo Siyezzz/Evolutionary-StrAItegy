@@ -24,10 +24,9 @@ from __future__ import annotations
 
 import numpy as np
 
-from .bandit import ExpertBandit
-from .regret import RegretMatcher
-from .regime import detect_regime
-from data.opponent_model import opponent_state
+from .bandit import make_allocator
+from .regret import make_regret_matcher
+from .regime import detect_context
 
 
 def precompute_signals(close: np.ndarray, volume: np.ndarray, experts) -> dict:
@@ -53,11 +52,13 @@ def simulate_period(
     end: int,
     experts,
     params: dict,
-    bandit: ExpertBandit,
-    regret: RegretMatcher,
+    bandit,
+    regret,
     signals: dict,
     record: bool = False,
     store: dict | None = None,
+    initial_position: float = 0.0,
+    contexts: np.ndarray | None = None,
 ):
     """Online-simulate the period ``[start, end)`` and return the pnl list.
 
@@ -67,10 +68,18 @@ def simulate_period(
     """
     names = [e.name for e in experts]
     pnls = []
-    for t in range(start + 1, end):
+    previous_position = float(initial_position)
+    first_return = max(1, start)
+    final_return = min(end, len(close))
+    for t in range(first_return, final_return):
         s_t = t - 1
+        context = (
+            str(contexts[s_t])
+            if contexts is not None
+            else detect_context(close, volume, s_t)
+        )
         bw = bandit.weights()
-        rw = regret.weights()
+        rw = regret.weights(context)
         pos = 0.0
         rewards = {}
         for e in experts:
@@ -80,8 +89,6 @@ def simulate_period(
             rewards[e.name] = sig * (close[t] / close[t - 1] - 1.0)
 
         r = close[t] / close[t - 1] - 1.0
-        pnl = pos * r
-
         # volatility targeting: scale down when realised vol is high
         vt = params["vol_target"]
         recent = close[max(0, t - 21) : t]
@@ -91,26 +98,38 @@ def simulate_period(
             rv = vt
         risk_scale = float(np.clip(vt / rv, 0.2, 3.0))
         pos = float(np.tanh(pos)) * params["risk"] * risk_scale
-        pnl = pos * r
+        max_abs_position = float(params.get("max_abs_position", 1.0))
+        pos = float(np.clip(pos, -max_abs_position, max_abs_position))
+        cost_rate = float(params.get("transaction_cost_bps", 0.0)) / 10_000.0
+        turnover = abs(pos - previous_position)
+        pnl = pos * r - turnover * cost_rate
 
         pnls.append(pnl)
-        for e in experts:
-            bandit.update(e.name, rewards[e.name])
-        regret.update(rewards)
+        if hasattr(bandit, "update_all"):
+            bandit.update_all(rewards)
+        else:
+            for e in experts:
+                bandit.update(e.name, rewards[e.name])
+        regret.update(rewards, played_weights=rw, context=context)
+        previous_position = pos
 
         if record and store is not None:
-            store["t"].append(t)
-            store["pos"].append(pos)
-            store["pnl"].append(pnl)
+            store.setdefault("t", []).append(t)
+            store.setdefault("pos", []).append(pos)
+            store.setdefault("pnl", []).append(pnl)
+            store.setdefault("turnover", []).append(turnover)
+            store.setdefault("context", []).append(context)
+    if store is not None:
+        store["final_position"] = previous_position
     return pnls
 
 
-def _fitness(pnls: list[float]) -> float:
+def _fitness(pnls: list[float], periods_per_year: int = 365) -> float:
     arr = np.array(pnls, dtype=float)
     if len(arr) < 10:
         return -1e9
-    sharpe = arr.mean() / (arr.std() + 1e-9) * np.sqrt(252)
-    eq = np.cumprod(1.0 + arr)
+    sharpe = arr.mean() / (arr.std() + 1e-9) * np.sqrt(periods_per_year)
+    eq = np.concatenate(([1.0], np.cumprod(1.0 + arr)))
     peak = np.maximum.accumulate(eq)
     dd = (eq - peak) / peak
     # reward return quality, penalise deep drawdowns
@@ -127,6 +146,7 @@ def es_search(
     config: dict,
     rng: np.random.Generator,
     signals: dict,
+    contexts: np.ndarray | None = None,
 ):
     """Evolution Strategy over meta-parameters, scored on the in-sample window."""
     names = [e.name for e in experts]
@@ -135,11 +155,20 @@ def es_search(
     sigma = float(config["es_sigma"])
 
     pop = []
-    for _ in range(pop_size):
+    # The incumbent is always evaluated. Other candidates mutate around it,
+    # which lets walk-forward epochs inherit rather than restart evolution.
+    pop.append(dict(base_params))
+    for _ in range(pop_size - 1):
         p = dict(base_params)
-        p["blend"] = float(np.clip(rng.normal(0.5, 0.25), 0.0, 1.0))
-        p["risk"] = float(np.clip(rng.normal(1.0, 0.4), 0.3, 3.0))
-        p["vol_target"] = float(np.clip(rng.normal(0.02, 0.01), 0.005, 0.06))
+        p["blend"] = float(
+            np.clip(rng.normal(base_params["blend"], 0.25), 0.0, 1.0)
+        )
+        p["risk"] = float(
+            np.clip(rng.normal(base_params["risk"], 0.4), 0.3, 3.0)
+        )
+        p["vol_target"] = float(
+            np.clip(rng.normal(base_params["vol_target"], 0.01), 0.005, 0.06)
+        )
         pop.append(p)
 
     best = None
@@ -147,12 +176,13 @@ def es_search(
     for _ in range(generations):
         scored = []
         for p in pop:
-            bandit = ExpertBandit(names)
-            regret = RegretMatcher(names)
+            bandit = make_allocator(names, config)
+            regret = make_regret_matcher(names, config)
             pnls = simulate_period(
-                close, volume, tr_start, tr_end, experts, p, bandit, regret, signals
+                close, volume, tr_start, tr_end, experts, p, bandit, regret,
+                signals, contexts=contexts,
             )
-            f = _fitness(pnls)
+            f = _fitness(pnls, int(config.get("periods_per_year", 365)))
             scored.append((f, p))
             if f > best_fit:
                 best_fit = f

@@ -1,0 +1,51 @@
+{
+  "status": "completed",
+  "authorization_sha256": "5ffc0247c347ca7104950d95198529d94f6a16251047a893147e20da91c6f13b",
+  "completed_at_utc": "2026-09-07T06:49:22.625725+00:00",
+  "symbol": "TLT",
+  "predecessor": {
+    "experts": [
+      "momentum",
+      "mean_reversion",
+      "news_sentiment"
+    ],
+    "max_abs_position": 1.0,
+    "epochs": 156,
+    "steps": 3270,
+    "total_return": -0.16702539894953372,
+    "annualized_return": -0.01398493959116065,
+    "annualized_volatility": 0.02893847899614006,
+    "sharpe": -0.4721445407156047,
+    "sortino": -0.6507544173171529,
+    "max_drawdown": -0.174724124844959,
+    "average_abs_exposure": 0.10250976612334368,
+    "annualized_turnover": 14.79228614500337
+  },
+  "candidate": {
+    "experts": [
+      "momentum",
+      "long_horizon_momentum",
+      "long_only_trend"
+    ],
+    "max_abs_position": 0.5,
+    "epochs": 156,
+    "steps": 3270,
+    "total_return": -0.23279996494254251,
+    "annualized_return": -0.020215483377164722,
+    "annualized_volatility": 0.058810792148793145,
+    "sharpe": -0.3178305218473966,
+    "sortino": -0.4388930362701619,
+    "max_drawdown": -0.3188666781644322,
+    "average_abs_exposure": 0.3631075555787082,
+    "annualized_turnover": 10.280197053016643
+  },
+  "paired": {
+    "sharpe_delta_candidate_minus_predecessor": 0.1543140188682081,
+    "return_delta_candidate_minus_predecessor": -0.0657745659930088,
+    "drawdown_delta_candidate_minus_predecessor": -0.1441425533194732
+  },
+  "prediction_outcome": {
+    "primary_sharpe": true,
+    "risk_drawdown": false
+  }
+}

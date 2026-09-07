@@ -15,16 +15,22 @@ know the history it is about to predict.**
 
 ## The idea in one paragraph
 
-A pool of expert strategies (momentum, mean-reversion, news-sentiment) each emit
+A pool of expert strategies (momentum, mean-reversion, a price/volume proxy) each emit
 a position intent from *past* data only. Two learning mechanisms blend them: a
-**multi-armed bandit** that allocates weight by reward, and a **regret-matching**
-learner that hedges against the opponent the way self-play poker agents (Libratus,
-Pluribus) do. An **Evolution Strategy** mutates the meta-parameters (how much to
+legacy-named **expert allocator** that weights posterior rewards, and a **regret-matching**
+learner that minimizes external regret in a repeated decision problem. This is
+not CFR, self-play, or a proof of Nash convergence. An **Evolution Strategy** mutates the meta-parameters (how much to
 trust the bandit vs the regret learner, how much risk to take, the volatility
 target), keeps the fittest on in-sample data, and repeats. The whole thing is
-driven by a scheduler that re-runs the loop every few hours, and every successful
-configuration can be *distilled* into a reusable expert "skill" — so the system
-compounds its own knowledge over time.
+driven by a scheduler that re-runs the loop every few hours. Cross-epoch champion
+inheritance is configurable, but disabled by default after failing the first
+paired robustness test. OOS results are reported, never used directly for selection.
+
+The latest screened trend pool passed BTC/SPY/GLD development gates but failed
+the one-time TLT lockbox risk prediction: Sharpe improved while total return and
+maximum drawdown worsened. It was not promoted, TLT is permanently consumed, and
+the conservative research default remains the predecessor configuration. See
+[`docs/RESEARCH_PLAN.md`](docs/RESEARCH_PLAN.md) for the complete negative result.
 
 ---
 
@@ -42,7 +48,7 @@ prevented.
 
 | Module | Responsibility |
 |--------|----------------|
-| `engine/bandit.py` | multi-armed bandit over experts (weight allocation) |
+| `engine/bandit.py` | full-information expert weighting (legacy class name) |
 | `engine/regret.py` | regret-matching / no-regret learner (game-theoretic core) |
 | `engine/regime.py` | causal market-regime detection |
 | `engine/evolve.py` | online simulator + Evolution-Strategy meta-search |
@@ -50,6 +56,10 @@ prevented.
 | `data/` | market loading, news placeholder, opponent model |
 | `backtest/simulate.py` | walk-forward, out-of-sample evaluation |
 | `evolve_run.py` | single run entry point (what a scheduler calls) |
+
+The current opponent/regime modules are research scaffolding and are not yet
+wired into the policy. See [`docs/RESEARCH_PLAN.md`](docs/RESEARCH_PLAN.md) for
+the honest current boundary and the next experiments.
 
 ---
 

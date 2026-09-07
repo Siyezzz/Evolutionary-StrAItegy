@@ -37,13 +37,15 @@ The policy blends three cooperating mechanisms:
 
 | Mechanism | Role | Inspiration |
 |-----------|------|-------------|
-| `bandit`  | allocate weight across experts by posterior reward | multi-armed bandit (Thompson/UCB) |
-| `regret`  | hedge against the opponent via cumulative regret | regret matching / CFR (Libratus, Pluribus) |
+| `bandit`  | allocate weight across experts by posterior reward | full-information expert advice |
+| `regret`  | hedge across expert actions via cumulative regret | external regret matching |
 | `evolve`  | search meta-parameters (blend, risk, vol target) | Evolution Strategies + elitism |
 
-The `regret` learner is the explicitly game-theoretic piece: it converges to a
-strategy that cannot be exploited by an opponent that reveals its tendencies,
-exactly the property desired when the "opponent" is the live market.
+The `regret` learner is the explicitly game-theoretic piece. It treats expert
+selection as a full-information repeated decision problem and minimizes external
+regret against the observed return sequence. The market is not assumed to be a
+rational adversary, and this MVP does not implement CFR, self-play, or establish
+a Nash equilibrium. Regime-conditioned games are the next research step.
 
 ## Expert as a Skill
 

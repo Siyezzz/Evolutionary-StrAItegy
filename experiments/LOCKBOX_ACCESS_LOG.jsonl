@@ -1,0 +1,2 @@
+{"authorization_sha256": "5ffc0247c347ca7104950d95198529d94f6a16251047a893147e20da91c6f13b", "event": "opened", "lockbox_sha256": "9ae352abef1e7e41af70e4db494f1a5a1e95cb60961809154e0df5b70f6d8c16", "timestamp_utc": "2026-09-07T06:46:40.964071+00:00"}
+{"event": "completed", "result": "artifacts/lockbox_tlt_result.json", "result_sha256": "2484e44ce826b9e193e3c36b8a4a827aae7f76c68e705aec9f19a6c23f549591", "timestamp_utc": "2026-09-07T06:49:22.625725+00:00"}

@@ -22,3 +22,5 @@ Format per run:
   - epoch 7: blend=0.17 risk=0.30 vol_target=0.018 ret=+0.02%
   - epoch 8: blend=0.76 risk=0.30 vol_target=0.016 ret=+0.28%
   - epoch 9: blend=0.64 risk=0.30 vol_target=0.016 ret=-0.00%
+
+<!-- New runtime observations append below; generated reports remain in artifacts/. -->

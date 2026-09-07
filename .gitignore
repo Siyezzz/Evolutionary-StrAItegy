@@ -219,7 +219,16 @@ __marimo__/
 
 # Evolutionary-StrAItegy runtime artifacts
 run.log
-artifacts/
+artifacts/*
+!artifacts/robustness_7f01b227bed56dfb.json
+!artifacts/robustness_7f01b227bed56dfb.csv
+!artifacts/allocator_ablation_7a24605f293168e7.json
+!artifacts/contextual_transfer_*.json
+!artifacts/expert_diagnostics_*.json
+!artifacts/gene_pool_ablation_*.json
+!artifacts/screened_cost_grid_*.json
+!artifacts/lockbox_tlt_result.json
+!artifacts/risk_matched_cost_grid_*.json
 memory/performance.json
 __pycache__/
 *.pyc

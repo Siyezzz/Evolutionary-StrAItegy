@@ -1,0 +1,190 @@
+{
+  "run_id": "e9a66fed69d5c7ad",
+  "manifest": {
+    "preregistration": "experiments/risk_matched_preregistration.json",
+    "preregistration_sha256": "b727eba6b6624b370f518ef38f7de513cc4348cb5a9e88700401d29b854c4a5e",
+    "experts": [
+      "momentum",
+      "long_horizon_momentum",
+      "long_only_trend"
+    ],
+    "seed": 42,
+    "costs_bps": [
+      5.0,
+      10.0,
+      25.0
+    ],
+    "max_abs_position": 0.2,
+    "es_population": 3,
+    "es_generations": 1,
+    "code_sha256": "ac964be024ec5964b31930c8f232c80dd5bae538c6028d042f4d5af001075462",
+    "datasets": {
+      "BTC-USD": "4b6b530b61113f8b8ba9ee9492f98ce01149c7fde67a6eed5bbaa92652173951",
+      "SPY": "a453dab49a341fafaae84a8f91016191482c65b8e87d7d531fe62f11f1df385e",
+      "GLD": "f39df9f258f885e0f3b46a754c8e41603698e1176378606b4222055e0074a2fa"
+    }
+  },
+  "rows": [
+    {
+      "symbol": "BTC-USD",
+      "cost_bps": 5.0,
+      "epochs": 98,
+      "steps": 2052,
+      "total_return": 0.8028467388502676,
+      "annualized_return": 0.11052601177885713,
+      "annualized_volatility": 0.10620858851297277,
+      "sharpe": 1.0401978414617834,
+      "sortino": 1.598850711847094,
+      "max_drawdown": -0.14097385062510062,
+      "average_abs_exposure": 0.1679802594600836,
+      "annualized_turnover": 3.462498752075359
+    },
+    {
+      "symbol": "BTC-USD",
+      "cost_bps": 10.0,
+      "epochs": 98,
+      "steps": 2052,
+      "total_return": 0.7853870087637116,
+      "annualized_return": 0.10860531578455124,
+      "annualized_volatility": 0.10621118759201938,
+      "sharpe": 1.0238723208509002,
+      "sortino": 1.5731064128980534,
+      "max_drawdown": -0.14246466870234367,
+      "average_abs_exposure": 0.1679802594600836,
+      "annualized_turnover": 3.462498752075359
+    },
+    {
+      "symbol": "BTC-USD",
+      "cost_bps": 25.0,
+      "epochs": 98,
+      "steps": 2052,
+      "total_return": 0.7278489897285252,
+      "annualized_return": 0.10216445056740975,
+      "annualized_volatility": 0.10657107742214346,
+      "sharpe": 0.9660848413663646,
+      "sortino": 1.4800031598048267,
+      "max_drawdown": -0.15179366706843908,
+      "average_abs_exposure": 0.16882557484971164,
+      "annualized_turnover": 3.399710764563982
+    },
+    {
+      "symbol": "SPY",
+      "cost_bps": 5.0,
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": 0.24871258376687333,
+      "annualized_return": 0.017264306691799458,
+      "annualized_volatility": 0.02764847127900013,
+      "sharpe": 0.6329505782940639,
+      "sortino": 0.858513109765857,
+      "max_drawdown": -0.08235723422272673,
+      "average_abs_exposure": 0.18419205870017502,
+      "annualized_turnover": 1.8425513040158472
+    },
+    {
+      "symbol": "SPY",
+      "cost_bps": 10.0,
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": 0.23662841036158855,
+      "annualized_return": 0.01650224828805169,
+      "annualized_volatility": 0.02762965364632512,
+      "sharpe": 0.6062378847981078,
+      "sortino": 0.8214982651646432,
+      "max_drawdown": -0.08626860275092013,
+      "average_abs_exposure": 0.18406605338777204,
+      "annualized_turnover": 1.8241264021386427
+    },
+    {
+      "symbol": "SPY",
+      "cost_bps": 25.0,
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": 0.19408928863340802,
+      "annualized_return": 0.01376380458563653,
+      "annualized_volatility": 0.027717304624409595,
+      "sharpe": 0.5070766665902466,
+      "sortino": 0.684068098733037,
+      "max_drawdown": -0.09571395880723012,
+      "average_abs_exposure": 0.18448994545056566,
+      "annualized_turnover": 1.8589416529946885
+    },
+    {
+      "symbol": "GLD",
+      "cost_bps": 5.0,
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": -0.03791105647524384,
+      "annualized_return": -0.0029739758812935557,
+      "annualized_volatility": 0.027454368188858852,
+      "sharpe": -0.09476070390977095,
+      "sortino": -0.13361725998859716,
+      "max_drawdown": -0.11108308988748528,
+      "average_abs_exposure": 0.17518286870180458,
+      "annualized_turnover": 4.80483591322371
+    },
+    {
+      "symbol": "GLD",
+      "cost_bps": 10.0,
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": -0.06481441686506739,
+      "annualized_return": -0.005150784321378832,
+      "annualized_volatility": 0.027507551011030043,
+      "sharpe": -0.1739809031859082,
+      "sortino": -0.24491588863278016,
+      "max_drawdown": -0.1358133813479685,
+      "average_abs_exposure": 0.17550355043895974,
+      "annualized_turnover": 4.786903809256624
+    },
+    {
+      "symbol": "GLD",
+      "cost_bps": 25.0,
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": -0.14810996095734452,
+      "annualized_return": -0.012277238814181302,
+      "annualized_volatility": 0.027729555232105452,
+      "sharpe": -0.4316166460329825,
+      "sortino": -0.6024184554663485,
+      "max_drawdown": -0.21243818688001642,
+      "average_abs_exposure": 0.17671295662523967,
+      "annualized_turnover": 4.766321727113993
+    }
+  ],
+  "paired_at_10_bps": [
+    {
+      "symbol": "BTC-USD",
+      "sharpe_delta": 1.213857711969226,
+      "return_delta": 0.8803247729995607,
+      "drawdown_delta": 0.10917107826501701,
+      "annualized_volatility_ratio": 1.3693383933481986
+    },
+    {
+      "symbol": "SPY",
+      "sharpe_delta": 1.4225967015481538,
+      "return_delta": 0.4202515815051344,
+      "drawdown_delta": 0.1136165221964009,
+      "annualized_volatility_ratio": 1.459463351114757
+    },
+    {
+      "symbol": "GLD",
+      "sharpe_delta": 1.2933099226917069,
+      "return_delta": 0.2463787657676434,
+      "drawdown_delta": 0.17980559569246946,
+      "annualized_volatility_ratio": 1.4142991248403145
+    }
+  ],
+  "summary": {
+    "sharpe_wins": 3,
+    "drawdown_no_worse": 3,
+    "volatility_ratio_in_0.75_1.50": 3,
+    "mean_sharpe_delta": 1.309921445403029,
+    "mean_return_delta": 0.5156517067574461,
+    "return_monotonic_by_market": {
+      "BTC-USD": true,
+      "SPY": true,
+      "GLD": true
+    }
+  }
+}

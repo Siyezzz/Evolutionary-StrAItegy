@@ -1,0 +1,139 @@
+{
+  "run_id": "d838b711cadac1f9",
+  "manifest": {
+    "pools": {
+      "old": [
+        "momentum",
+        "mean_reversion",
+        "news_sentiment"
+      ],
+      "screened": [
+        "momentum",
+        "long_horizon_momentum",
+        "long_only_trend"
+      ]
+    },
+    "seed": 42,
+    "cost_bps": 10.0,
+    "max_abs_position": 1.0,
+    "es_population": 3,
+    "es_generations": 1,
+    "datasets": {
+      "BTC-USD": "4b6b530b61113f8b8ba9ee9492f98ce01149c7fde67a6eed5bbaa92652173951",
+      "SPY": "a453dab49a341fafaae84a8f91016191482c65b8e87d7d531fe62f11f1df385e",
+      "GLD": "f39df9f258f885e0f3b46a754c8e41603698e1176378606b4222055e0074a2fa"
+    }
+  },
+  "rows": [
+    {
+      "symbol": "BTC-USD",
+      "pool": "old",
+      "epochs": 98,
+      "steps": 2052,
+      "total_return": -0.0949377642358491,
+      "annualized_return": -0.01758684854797843,
+      "annualized_volatility": 0.07756387179966533,
+      "sharpe": -0.1899853911183257,
+      "sortino": -0.27383074848859124,
+      "max_drawdown": -0.2516357469673607,
+      "average_abs_exposure": 0.0952347117631019,
+      "annualized_turnover": 22.85094419176866
+    },
+    {
+      "symbol": "BTC-USD",
+      "pool": "screened",
+      "epochs": 98,
+      "steps": 2052,
+      "total_return": 1.3076287514875773,
+      "annualized_return": 0.16037464422605652,
+      "annualized_volatility": 0.2580075940492627,
+      "sharpe": 0.7049218294287632,
+      "sortino": 1.0698045898529431,
+      "max_drawdown": -0.40834574226024734,
+      "average_abs_exposure": 0.40974443929171467,
+      "annualized_turnover": 13.452967939712224
+    },
+    {
+      "symbol": "SPY",
+      "pool": "old",
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": -0.18362317114354587,
+      "annualized_return": -0.015513141796505758,
+      "annualized_volatility": 0.0189313788696518,
+      "sharpe": -0.816358816750046,
+      "sortino": -1.03885471734755,
+      "max_drawdown": -0.19988512494732102,
+      "average_abs_exposure": 0.08821041809068136,
+      "annualized_turnover": 12.833683066690831
+    },
+    {
+      "symbol": "SPY",
+      "pool": "screened",
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": 1.5408337258416678,
+      "annualized_return": 0.07450682544154019,
+      "annualized_volatility": 0.10251907994853589,
+      "sharpe": 0.7524597471661771,
+      "sortino": 1.0342809403727793,
+      "max_drawdown": -0.2604516268856144,
+      "average_abs_exposure": 0.7665423360379534,
+      "annualized_turnover": 7.688893861181747
+    },
+    {
+      "symbol": "GLD",
+      "pool": "old",
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": -0.3111931826327108,
+      "annualized_return": -0.028320354746033782,
+      "annualized_volatility": 0.019449599117963012,
+      "sharpe": -1.4672908258776152,
+      "sortino": -1.9033381806383387,
+      "max_drawdown": -0.31561897704043795,
+      "average_abs_exposure": 0.0966386916819718,
+      "annualized_turnover": 15.941993704001987
+    },
+    {
+      "symbol": "GLD",
+      "pool": "screened",
+      "epochs": 156,
+      "steps": 3270,
+      "total_return": -0.055024092196086616,
+      "annualized_return": -0.004352017160596966,
+      "annualized_volatility": 0.09591555532794548,
+      "sharpe": 0.0025675947039654878,
+      "sortino": 0.0035778524364859883,
+      "max_drawdown": -0.32876009983735005,
+      "average_abs_exposure": 0.5373984316147076,
+      "annualized_turnover": 15.260080814454998
+    }
+  ],
+  "paired": [
+    {
+      "symbol": "BTC-USD",
+      "sharpe_delta_screened_minus_old": 0.8949072205470889,
+      "return_delta_screened_minus_old": 1.4025665157234264,
+      "drawdown_delta_screened_minus_old": -0.15670999529288665
+    },
+    {
+      "symbol": "SPY",
+      "sharpe_delta_screened_minus_old": 1.568818563916223,
+      "return_delta_screened_minus_old": 1.7244568969852136,
+      "drawdown_delta_screened_minus_old": -0.06056650193829338
+    },
+    {
+      "symbol": "GLD",
+      "sharpe_delta_screened_minus_old": 1.4698584205815806,
+      "return_delta_screened_minus_old": 0.25616909043662417,
+      "drawdown_delta_screened_minus_old": -0.013141122796912097
+    }
+  ],
+  "summary": {
+    "screened_sharpe_wins": 3,
+    "markets": 3,
+    "mean_sharpe_delta": 1.3111947350149642,
+    "mean_return_delta": 1.1277308343817547
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "run_id": "57f1cfec3d981984",
+  "manifest": {
+    "first_oos_index": 504,
+    "transaction_cost_bps": 10.0,
+    "risk": 1.0,
+    "vol_target": 0.02,
+    "datasets": {
+      "BTC-USD": "4b6b530b61113f8b8ba9ee9492f98ce01149c7fde67a6eed5bbaa92652173951",
+      "SPY": "a453dab49a341fafaae84a8f91016191482c65b8e87d7d531fe62f11f1df385e",
+      "GLD": "f39df9f258f885e0f3b46a754c8e41603698e1176378606b4222055e0074a2fa"
+    }
+  },
+  "rows": [
+    {
+      "symbol": "BTC-USD",
+      "expert": "momentum",
+      "steps": 2052,
+      "total_return": 1.2283451551096274,
+      "annualized_return": 0.15318096483092236,
+      "annualized_volatility": 0.23846880640049947,
+      "sharpe": 0.7153826083587279,
+      "sortino": 1.146255866649655,
+      "max_drawdown": -0.30724647893178614,
+      "average_abs_exposure": 0.3178908157262237,
+      "annualized_turnover": 31.606546198547683
+    },
+    {
+      "symbol": "BTC-USD",
+      "expert": "mean_reversion",
+      "steps": 2052,
+      "total_return": -0.7579171684189414,
+      "annualized_return": -0.22299744888753004,
+      "annualized_volatility": 0.21315282985857864,
+      "sharpe": -1.074763519956253,
+      "sortino": -1.3273218377466325,
+      "max_drawdown": -0.7747024239998327,
+      "average_abs_exposure": 0.2559427633680822,
+      "annualized_turnover": 35.201789639360605
+    },
+    {
+      "symbol": "BTC-USD",
+      "expert": "news_sentiment",
+      "steps": 2052,
+      "total_return": -0.22394889883484426,
+      "annualized_return": -0.04409614345676305,
+      "annualized_volatility": 0.136459085636865,
+      "sharpe": -0.26261690099443874,
+      "sortino": -0.4069013196461431,
+      "max_drawdown": -0.3660411793386629,
+      "average_abs_exposure": 0.15989276291374122,
+      "annualized_turnover": 83.81937616867718
+    },
+    {
+      "symbol": "BTC-USD",
+      "expert": "equal",
+      "steps": 2052,
+      "total_return": -0.05649871630660974,
+      "annualized_return": -0.010291465720401183,
+      "annualized_volatility": 0.06359580876734297,
+      "sharpe": -0.1309133916888269,
+      "sortino": -0.19615404845284495,
+      "max_drawdown": -0.22601596720918893,
+      "average_abs_exposure": 0.08473389744698832,
+      "annualized_turnover": 27.8177050896913
+    },
+    {
+      "symbol": "SPY",
+      "expert": "momentum",
+      "steps": 3270,
+      "total_return": -0.3345242048531677,
+      "annualized_return": -0.030897250274028232,
+      "annualized_volatility": 0.07644867642536184,
+      "sharpe": -0.3721727887536145,
+      "sortino": -0.49730075465250567,
+      "max_drawdown": -0.3917531298322119,
+      "average_abs_exposure": 0.4423117666308278,
+      "annualized_turnover": 32.250858878060484
+    },
+    {
+      "symbol": "SPY",
+      "expert": "mean_reversion",
+      "steps": 3270,
+      "total_return": -0.2452062075900443,
+      "annualized_return": -0.021445688594928347,
+      "annualized_volatility": 0.06344389782672386,
+      "sharpe": -0.31000745952392017,
+      "sortino": -0.4539593519621151,
+      "max_drawdown": -0.2636694870545455,
+      "average_abs_exposure": 0.30905734234366283,
+      "annualized_turnover": 33.38005777477657
+    },
+    {
+      "symbol": "SPY",
+      "expert": "news_sentiment",
+      "steps": 3270,
+      "total_return": -0.6216541426739299,
+      "annualized_return": -0.07216587037187006,
+      "annualized_volatility": 0.04061413778866401,
+      "sharpe": -1.8236256376486135,
+      "sortino": -2.315920626998809,
+      "max_drawdown": -0.6277637823761633,
+      "average_abs_exposure": 0.17388915854642276,
+      "annualized_turnover": 63.212640497213606
+    },
+    {
+      "symbol": "SPY",
+      "expert": "equal",
+      "steps": 3270,
+      "total_return": -0.21414369521383414,
+      "annualized_return": -0.01839965844515068,
+      "annualized_volatility": 0.02008618289492639,
+      "sharpe": -0.9144841287430572,
+      "sortino": -1.1988588167782506,
+      "max_drawdown": -0.2304277993655803,
+      "average_abs_exposure": 0.10818530625465313,
+      "annualized_turnover": 20.304740845466938
+    },
+    {
+      "symbol": "GLD",
+      "expert": "momentum",
+      "steps": 3270,
+      "total_return": -0.506834344788017,
+      "annualized_return": -0.053020164638045264,
+      "annualized_volatility": 0.08637340057361442,
+      "sharpe": -0.5874073590274977,
+      "sortino": -0.8075623935838204,
+      "max_drawdown": -0.5129580571538397,
+      "average_abs_exposure": 0.44849742969677947,
+      "annualized_turnover": 34.56855784762895
+    },
+    {
+      "symbol": "GLD",
+      "expert": "mean_reversion",
+      "steps": 3270,
+      "total_return": -0.44770339395359193,
+      "annualized_return": -0.044719934542641115,
+      "annualized_volatility": 0.06731961650231388,
+      "sharpe": -0.6457868576379375,
+      "sortino": -0.8736869859706875,
+      "max_drawdown": -0.48629503249147776,
+      "average_abs_exposure": 0.32573658105771847,
+      "annualized_turnover": 34.782070034008825
+    },
+    {
+      "symbol": "GLD",
+      "expert": "news_sentiment",
+      "steps": 3270,
+      "total_return": -0.5917221474417418,
+      "annualized_return": -0.06670569921627112,
+      "annualized_volatility": 0.03556641663236711,
+      "sharpe": -1.9230093447688603,
+      "sortino": -2.644158997250105,
+      "max_drawdown": -0.5961198769736773,
+      "average_abs_exposure": 0.1839356036877527,
+      "annualized_turnover": 67.65649268312876
+    },
+    {
+      "symbol": "GLD",
+      "expert": "equal",
+      "steps": 3270,
+      "total_return": -0.3347270782509264,
+      "annualized_return": -0.03092002098325186,
+      "annualized_volatility": 0.020805320859906225,
+      "sharpe": -1.499117826040297,
+      "sortino": -1.9559718369356656,
+      "max_drawdown": -0.3347270782509264,
+      "average_abs_exposure": 0.11189340461603997,
+      "annualized_turnover": 21.923786155038556
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "status": "authorized",
+  "authorized_at_utc": "2026-09-07T06:44:16.127Z",
+  "protocol": "experiments/LOCKBOX_PROTOCOL.md",
+  "development_gate": {
+    "predecessor_report": "artifacts/gene_pool_ablation_d838b711cadac1f9.json",
+    "candidate_report": "artifacts/screened_cost_grid_b969658aab15cdcb.json",
+    "comparison_cost_bps": 10.0,
+    "sharpe_wins_required": 2,
+    "sharpe_wins_observed": 3,
+    "mean_sharpe_delta_observed": 1.2998633059543,
+    "drawdown_no_worse_required": 2,
+    "drawdown_no_worse_observed": 3,
+    "return_monotonic_at_5_10_25_bps": {
+      "BTC-USD": true,
+      "SPY": true,
+      "GLD": true
+    }
+  },
+  "frozen_comparison": {
+    "common": {
+      "seed": 42,
+      "transaction_cost_bps": 10.0,
+      "periods_per_year": 252,
+      "es_population": 3,
+      "es_generations": 1,
+      "inherit_champion": false,
+      "allocator": "legacy",
+      "regret_mode": "global"
+    },
+    "predecessor": {
+      "experts": [
+        "momentum",
+        "mean_reversion",
+        "news_sentiment"
+      ],
+      "max_abs_position": 1.0
+    },
+    "candidate": {
+      "experts": [
+        "momentum",
+        "long_horizon_momentum",
+        "long_only_trend"
+      ],
+      "max_abs_position": 0.5
+    }
+  },
+  "directional_prediction_before_open": {
+    "primary": "candidate net OOS Sharpe on TLT is greater than predecessor net OOS Sharpe",
+    "risk": "candidate TLT maximum drawdown is no worse than predecessor maximum drawdown"
+  },
+  "frozen_code_sha256": "ac964be024ec5964b31930c8f232c80dd5bae538c6028d042f4d5af001075462",
+  "lockbox": {
+    "path": "data/lockbox_tlt_daily.csv",
+    "sha256": "9ae352abef1e7e41af70e4db494f1a5a1e95cb60961809154e0df5b70f6d8c16"
+  },
+  "pre_open_tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "tests_run": 12,
+    "result": "OK"
+  },
+  "prior_model_selection_trials": {
+    "artifacts/robustness_7f01b227bed56dfb.json": "c8adbff26744450e6c5a811b706a6091d1e6d496dc12b61ae8955978e4ccc50f",
+    "artifacts/allocator_ablation_7a24605f293168e7.json": "73532030db92dedf5c9f7ff3f5207c4191302681f3f4e003e542925cce2179dc",
+    "artifacts/contextual_transfer_b4de7caf581ca7ba.json": "f2f5f794fb08b1f98c0bda88f502c9bdf6def53032aa516060f31759993cc795",
+    "artifacts/contextual_transfer_df90a81df2f03c75.json": "83ae5ce66f3786cd5207aaddd28d52f1bc22e4d218c313811d76617eb46ae4a1",
+    "artifacts/expert_diagnostics_57f1cfec3d981984.json": "bf24b15973256f1077d15583b44b776189fb2534f0868a157eaaf33484a560b3",
+    "artifacts/expert_diagnostics_6f0cf7cbf364d0d4.json": "a74bd551adeff52fa106fe54acfd9010c8d8f656cb547cea09832b547f87da5b",
+    "artifacts/expert_diagnostics_f0faeed1c84e55e7.json": "1bf0380e2bb1abc59e7d10f8ae432cba27c43fdacb8980fc9f8eb1884a320aa7",
+    "artifacts/gene_pool_ablation_d838b711cadac1f9.json": "c9dd41fb697774eee278ccd13bd0c19e7c19fa6be084fe52c478a94ec2feda12",
+    "artifacts/screened_cost_grid_b969658aab15cdcb.json": "ca5790b3f662913913e98dc11d7b31bfe1b02514b96a342f5d8e67a68b4d0787"
+  }
+}
